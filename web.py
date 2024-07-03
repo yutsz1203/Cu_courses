@@ -17,7 +17,7 @@ def main():
                 df1 = pd.read_csv(csv_file_1, header=None, dtype=str)
                 df2 = pd.read_csv(csv_file_2, header=None, dtype=str)
                 for index, row in df1.iterrows():
-                    course_code = entry + row[0]
+                    course_code = entry + ' ' + row[0]
                     course_name = row[1]
                     course_des = df2.iloc[index, 0]
                     json_list.append({
