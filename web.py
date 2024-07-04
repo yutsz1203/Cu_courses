@@ -9,6 +9,7 @@ def main():
     for entry in os.listdir(courses_dir):
         full_path = os.path.join(courses_dir, entry)
         # print(entry)
+        
         if os.path.isdir(full_path):
             csv_file_1 = os.path.join(full_path, f"{entry}.csv")
             csv_file_2 = os.path.join(full_path, f"{entry}_d.csv")
