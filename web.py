@@ -6,19 +6,21 @@ import json
 def main():
     courses_dir = 'course'
     json_list = []
-    for entry in os.listdir(courses_dir):
-        full_path = os.path.join(courses_dir, entry)
-        # print(entry)
-        
+    entries = os.listdir(courses_dir)
+    directories = sorted([entry for entry in entries if os.path.isdir(os.path.join(courses_dir, entry))])
+
+    for directory in directories:
+        full_path = os.path.join(courses_dir, directory)
+
         if os.path.isdir(full_path):
-            csv_file_1 = os.path.join(full_path, f"{entry}.csv")
-            csv_file_2 = os.path.join(full_path, f"{entry}_d.csv")
+            csv_file_1 = os.path.join(full_path, f"{directory}.csv")
+            csv_file_2 = os.path.join(full_path, f"{directory}_d.csv")
             # print(csv_file_1, csv_file_2)
             if os.path.isfile(csv_file_1) and os.path.isfile(csv_file_2):
                 df1 = pd.read_csv(csv_file_1, header=None, dtype=str)
                 df2 = pd.read_csv(csv_file_2, header=None, dtype=str)
                 for index, row in df1.iterrows():
-                    course_code = entry + ' ' + row[0]
+                    course_code = directory + ' ' + row[0]
                     course_name = row[1]
                     course_des = df2.iloc[index, 0]
                     json_list.append({
